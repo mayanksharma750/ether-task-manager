@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethara Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="app-shell">
+        <section class="auth-panel" id="authPanel">
+            <div class="intro">
+                <p class="eyebrow">Ethara</p>
+                <h1>Plan the work. See what needs attention.</h1>
+                <p class="intro-copy">A small workspace for projects, tasks, and the quiet little signals that keep a team moving.</p>
+            </div>
+
+            <div class="auth-grid">
+                <form class="panel" id="loginForm">
+                    <div class="panel-heading">
+                        <h2>Welcome back</h2>
+                        <p>Pick up where the team left off.</p>
+                    </div>
+                    <label>
+                        Email
+                        <input type="email" id="loginEmail" required autocomplete="email" placeholder="you@example.com">
+                    </label>
+                    <label>
+                        Password
+                        <input type="password" id="loginPassword" required autocomplete="current-password" placeholder="Your password">
+                    </label>
+                    <button type="submit">Sign in</button>
+                </form>
+
+                <form class="panel" id="signupForm">
+                    <div class="panel-heading">
+                        <h2>Start fresh</h2>
+                        <p>Create an account for this workspace.</p>
+                    </div>
+                    <label>
+                        Name
+                        <input type="text" id="signupName" required maxlength="100" autocomplete="name" placeholder="Avery Stone">
+                    </label>
+                    <label>
+                        Email
+                        <input type="email" id="signupEmail" required maxlength="150" autocomplete="email" placeholder="avery@example.com">
+                    </label>
+                    <label>
+                        Password
+                        <input type="password" id="signupPassword" required minlength="8" maxlength="72" autocomplete="new-password" placeholder="At least 8 characters">
+                    </label>
+                    <label>
+                        Role
+                        <select id="signupRole">
+                            <option value="MEMBER">Member</option>
+                            <option value="ADMIN">Admin</option>
+                        </select>
+                    </label>
+                    <button type="submit">Create account</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="dashboard hidden" id="dashboardPanel">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">Workspace</p>
+                    <h1>Today at a glance</h1>
+                    <p id="userSummary" class="muted"></p>
+                </div>
+                <button class="secondary" id="logoutButton" type="button">Logout</button>
+            </header>
+
+            <section class="stats-grid">
+                <article class="stat">
+                    <span>Total tasks</span>
+                    <strong id="totalTasks">0</strong>
+                    <p>Everything currently on the board.</p>
+                </article>
+                <article class="stat">
+                    <span>Completed</span>
+                    <strong id="completedTasks">0</strong>
+                    <p>Work already crossed off.</p>
+                </article>
+                <article class="stat">
+                    <span>Needs attention</span>
+                    <strong id="overdueTasks">0</strong>
+                    <p>Past due and not done yet.</p>
+                </article>
+            </section>
+
+            <section class="work-grid">
+                <form class="panel" id="projectForm">
+                    <div class="panel-heading">
+                        <h2>New project</h2>
+                        <p>Give the team a place to gather related work.</p>
+                    </div>
+                    <label>
+                        Name
+                        <input type="text" id="projectName" required maxlength="150" placeholder="Website refresh">
+                    </label>
+                    <label>
+                        Description
+                        <textarea id="projectDescription" maxlength="1000" rows="4" placeholder="What is this project trying to accomplish?"></textarea>
+                    </label>
+                    <button type="submit">Create project</button>
+                </form>
+
+                <form class="panel" id="taskForm">
+                    <div class="panel-heading">
+                        <h2>New task</h2>
+                        <p>Capture the next clear step.</p>
+                    </div>
+                    <label>
+                        Title
+                        <input type="text" id="taskTitle" required maxlength="150" placeholder="Draft landing page copy">
+                    </label>
+                    <label>
+                        Description
+                        <textarea id="taskDescription" maxlength="2000" rows="4" placeholder="Add enough context for the person picking this up."></textarea>
+                    </label>
+                    <div class="split">
+                        <label>
+                            Project ID
+                            <input type="number" id="taskProjectId" required min="1" placeholder="1">
+                        </label>
+                        <label>
+                            Assignee ID
+                            <input type="number" id="taskAssigneeId" min="1" placeholder="Optional">
+                        </label>
+                    </div>
+                    <label>
+                        Due date
+                        <input type="date" id="taskDueDate">
+                    </label>
+                    <button type="submit">Create task</button>
+                </form>
+            </section>
+
+            <section class="panel">
+                <div class="section-header">
+                    <div>
+                        <h2>Active projects</h2>
+                        <p>Recent project spaces and who is attached to them.</p>
+                    </div>
+                    <button class="secondary" id="refreshButton" type="button">Refresh</button>
+                </div>
+                <div id="projectsList" class="list"></div>
+            </section>
+        </section>
+
+        <p class="message" id="message"></p>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
